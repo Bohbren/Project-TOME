@@ -1,10 +1,13 @@
 //Everything here is for testing purposes. There will need to be ways to call from db and also save card position to db. As well as ways to edit cards
+var popupBox = document.getElementById("myPopupBox");
+var closeButton = document.getElementsByClassName("closeButton")[0];
+
 
 $(document).ready(function () {
   //generates the notecards on page load - this will likely call from a db in the future
   for (let index = 1; index < 4; index++) {
     $('#slot3').append("<div class='notecard' value = "+index+" id=card"+index+
-    " draggable='true' ondragstart='dragCardStart(event)'onClick='checkSlot(event)'>test card "+index+"</div>");
+    " draggable='true' ondragstart='dragCardStart(event)'onClick='openChangeText(event)'>test card "+index+"</div>");
   }
 });
 
@@ -37,4 +40,23 @@ function dropCard(ev) {
       // Append to the list
       targetElement.appendChild(sourceCardSlot);
     }
+}
+
+function openChangeText(ev) {
+  popupBox.style.display = "block";
+}
+
+
+
+
+// When the user clicks on <span> (x), close the modal
+closeButton.onclick = function() {
+  popupBox.style.display = "none";
+}
+
+// When the user clicks anywhere outside of the modal, close it
+window.onclick = function(event) {
+  if (event.target == popupBox) {
+    popupBox.style.display = "none";
+  }
 }
