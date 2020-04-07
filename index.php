@@ -4,6 +4,7 @@
 
 //Required Model files
 require_once('models/controllerSecurity.php');
+require_once("models/database.php");
 
 
 //Sets the cookie for the session
@@ -31,6 +32,7 @@ if ($action == NULL) {
 //Switch statement containing actions that take you to different views of the site.
 switch ($action) {
     case 'homeView':
+        $datab = Database::getDB();
         include("views/homeView.php");
         die();
         break;

@@ -1,8 +1,8 @@
 <?php
 class Database {
-    private static $dsn = 'mysql:host=localhost;dbname=program3-bohlin';
-    private static $username = 'root';
-    private static $password = '';
+    private static $dsn = 'mysql:host=tomedb.mysql.database.azure.com;dbname=tomedb;';
+    private static $username = 'lj553650@tomedb';
+    private static $password = 'Duff153z';
     private static $db;
 
     private function __construct() {}
@@ -16,7 +16,7 @@ class Database {
                 self::$db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
             } catch (PDOException $e) {
                 $error_message = $e->getMessage();
-                include('../errors/database_error.php');
+                echo $error_message;
                 exit();
             }
         }
