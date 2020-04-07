@@ -41,7 +41,7 @@ function dropCard(ev) {
       targetElement.appendChild(sourceCardSlot);
     }
 }
-
+``
 function openChangeText(ev) {
   popupBox.style.display = "block";
 }
