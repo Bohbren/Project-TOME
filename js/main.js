@@ -7,7 +7,8 @@ $(document).ready(function () {
   //generates the notecards on page load - this will likely call from a db in the future
   for (let index = 1; index < 4; index++) {
     $('#slot3').append("<div class='notecard' value = "+index+" id=card"+index+
-    " draggable='true' ondragstart='dragCardStart(event)'onClick='openChangeText(event)'>test card "+index+"</div>");
+    " draggable='true' ondragstart='dragCardStart(event)'onClick='openChangeText(event)'><span>test card "+index+
+    "</span><span style='float: right'>16 Hrs</span><br><p style=position: absolute; bottom: 8px; right: 16px;>Priority: 2</p></div>");
   }
 });
 
@@ -45,9 +46,6 @@ function dropCard(ev) {
 function openChangeText(ev) {
   popupBox.style.display = "block";
 }
-
-
-
 
 // When the user clicks on <span> (x), close the modal
 closeButton.onclick = function() {

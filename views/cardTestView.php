@@ -13,22 +13,27 @@
 </head>
 
 <body>
-
     <?php include('navbarView.php'); ?>
+    <div class="boardInformation">
+    <h2>Board Information: </h2>
+    <p>Calculated Hours: 55</p>
+    <p>Users Working: 5</p>
+    <p>Calculated Completion Date: April 7, 2020</p>
+    </div>
     <div class="boardLayout">
         <div id="slot1" class="emptyBoards" ondrop="dropCard(event)" ondragover="allowCardDrop(event)">
             <div class="headers">
-                <h1>Completed</h1>
+                <h1>Completed <span style="float: right">(15)</span></h1>
             </div>
         </div>
         <div id="slot2" class="emptyBoards" ondrop="dropCard(event)" ondragover="allowCardDrop(event)">
             <div class="headers">
-                <h1>In Progress</h1>
+                <h1>In Progress<span style="float: right">(15)</span></h1>
             </div>
         </div>
         <div id="slot3" class="emptyBoards" ondrop="dropCard(event)" ondragover="allowCardDrop(event)">
             <div class="headers">
-                <h1>Incomplete</h1>
+                <h1>Incomplete<span style="float: right">(15)</span></h1>
             </div>
         </div>
     </div>
