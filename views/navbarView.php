@@ -13,6 +13,7 @@
                     </ul>
                 </li>
                 <li><a href="index.php?action=cardTest">Note Cards Test</a></li>
+                <li><a href="index.php?action=chat">Chat</a></li>
             </ul>
         </div>
     </nav>

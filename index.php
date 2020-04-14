@@ -44,5 +44,9 @@ switch ($action) {
         include("views/login.php");
         die();
         break;
+     case 'chat':
+        include("views/chat.php");
+        die();
+        break;
 }
 ?>
