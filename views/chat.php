@@ -27,7 +27,7 @@
         <div class="container">
 			<br />
 			
-			<h3 align="center">Tome Messages</h3><br />
+			<h3 align="center">TOME Messages</h3><br />
 			<br />
 			<div class="row">
 				<div class="col-md-8 col-sm-6">

@@ -12,7 +12,7 @@ $(document).ready(function(){
 	function fetch_user()
 	{
 		$.ajax({
-			url:"fetch_user.php",
+			url:"models/chat/fetch_user.php",
 			method:"POST",
 			success:function(data){
 				$('#user_details').html(data);
@@ -23,7 +23,7 @@ $(document).ready(function(){
 	function update_last_activity()
 	{
 		$.ajax({
-			url:"update_last_activity.php",
+			url:"models/chat/update_last_activity.php",
 			success:function()
 			{
 
@@ -65,7 +65,7 @@ $(document).ready(function(){
 		if(chat_message != '')
 		{
 			$.ajax({
-				url:"..\models\insert_chat.php",
+				url:"models/chat/insert_chat.php",
 				method:"POST",
 				data:{to_user_id:to_user_id, chat_message:chat_message},
 				success:function(data)
@@ -86,7 +86,7 @@ $(document).ready(function(){
 	function get_chat_history(to_user_id)
 	{
 		$.ajax({
-			url:"..\models\get_chat_history.php",
+			url:"models/chat/get_chat_history.php",
 			method:"POST",
 			data:{to_user_id:to_user_id},
 			success:function(data){
@@ -111,7 +111,7 @@ $(document).ready(function(){
 	$(document).on('focus', '.chat_message', function(){
 		var is_type = 'yes';
 		$.ajax({
-			url:"update_is_type_status.php",
+			url:"models/chat/update_is_type_status.php",
 			method:"POST",
 			data:{is_type:is_type},
 			success:function()
@@ -124,7 +124,7 @@ $(document).ready(function(){
 	$(document).on('blur', '.chat_message', function(){
 		var is_type = 'no';
 		$.ajax({
-			url:"update_is_type_status.php",
+			url:"models/chat/update_is_type_status.php",
 			method:"POST",
 			data:{is_type:is_type},
 			success:function()
@@ -151,7 +151,7 @@ $(document).ready(function(){
 		if(chat_message != '')
 		{
 			$.ajax({
-				url:"..\models\group_chat.php",
+				url:"models/chat/group_chat.php",
 				method:"POST",
 				data:{chat_message:chat_message, action:action},
 				success:function(data){
@@ -173,7 +173,7 @@ $(document).ready(function(){
 		if(group_chat_dialog_active == 'yes')
 		{
 			$.ajax({
-				url:"..\models\group_chat.php",
+				url:"models/chat/group_chat.php",
 				method:"POST",
 				data:{action:action},
 				success:function(data)
@@ -196,7 +196,7 @@ $(document).ready(function(){
 		if(confirm("Are you sure you want to remove this chat?"))
 		{
 			$.ajax({
-				url:"remove_chat.php",
+				url:"models/chat/remove_chat.php",
 				method:"POST",
 				data:{chat_message_id:chat_message_id},
 				success:function(data)
