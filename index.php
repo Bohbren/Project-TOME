@@ -25,19 +25,23 @@ $action = filter_input(INPUT_POST, "action");
 if ($action == NULL) {
     $action = filter_input(INPUT_GET, "action");
     if ($action == NULL) {
-        $action = "homeView";
+        $action = "GET_HOME";
     }
 }
 
 //Switch statement containing actions that take you to different views of the site.
 switch ($action) {
-    case 'homeView':
+    case 'GET_HOME':
         $datab = Database::getDB();
         include("views/homeView.php");
         die();
         break;
     case 'cardTest':
         include("views/cardTestView.php");
+        die();
+        break;
+    case 'GET_LOGIN':
+        include("views/login.php");
         die();
         break;
 }

@@ -134,3 +134,9 @@
   max-width: 65%;
   max-height: 100px;
 }
+
+nav {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+}
