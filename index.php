@@ -7,7 +7,7 @@ require_once('models/controllerSecurity.php');
 require_once("models/database.php");
 require_once('models/User.php');
 require_once('models/UserEndpoint.php');
-require_once 'validation/validation.php';
+require_once('validation/validation.php');
 
 
 //Sets the cookie for the session
@@ -39,8 +39,8 @@ switch ($action) {
         include("views/homeView.php");
         die();
         break;
-    case 'cardTest':
-        include("views/cardTestView.php");
+    case 'taskBoard':
+        include("views/taskBoardView.php");
         die();
         break;
     case 'GET_LOGIN':
