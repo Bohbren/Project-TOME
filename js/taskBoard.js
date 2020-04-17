@@ -12,7 +12,7 @@ $(document).ready(function () {
   "columnNum" in the database.
 */
 
-function createTaskBoard(){
+function createTaskBoard() {
   //generates the notecards on page load - this will call from a db in the future
   let index = 3;
   $('#slot3').append("<div class='notecard' style='background-color: white' value = " + index + " id=task1" +
@@ -28,6 +28,23 @@ function createTaskBoard(){
   $('#slot3').append("<div class='notecard' value = " + index + " id=task3" +
     " draggable='true' ondragstart='dragCardStart(event)'onClick='openChangeText(event)'><span><strong>As a user I want to be able to edit task cards</strong></span>" +
     "<span style='float: right'>8 Hrs<br><span>Priority: 3</span><br><span style='bottom: 10px'>UNCLAIMED</span></span></div>");
+
+  $('#slot3').append("<div class='notecard' style='background-color: yellow' value = " + index + " id=task3" +
+    " draggable='true' ondragstart='dragCardStart(event)'onClick='openChangeText(event)'><span><strong>As a user I want to be able to edit task cards</strong></span>" +
+    "<span style='float: right'>8 Hrs<br><span>Priority: 3</span><br><span style='bottom: 10px'>UNCLAIMED</span></span></div>");
+
+  $('#slot3').append("<div class='notecard' style='background-color: white' value = " + index + " id=task3" +
+    " draggable='true' ondragstart='dragCardStart(event)'onClick='openChangeText(event)'><span><strong>As a user I want to be able to edit task cards</strong></span>" +
+    "<span style='float: right'>8 Hrs<br><span>Priority: 3</span><br><span style='bottom: 10px'>UNCLAIMED</span></span></div>");
+
+  $('#slot3').append("<div class='notecard' value = " + index + " id=task3" +
+    " draggable='true' ondragstart='dragCardStart(event)'onClick='openChangeText(event)'><span><strong>As a user I want to be able to edit task cards</strong></span>" +
+    "<span style='float: right'>8 Hrs<br><span>Priority: 3</span><br><span style='bottom: 10px'>UNCLAIMED</span></span></div>");
+
+  $('#slot3').append("<div class='notecard' style='background-color: white' value = " + index + " id=task3" +
+    " draggable='true' ondragstart='dragCardStart(event)'onClick='openChangeText(event)'><span><strong>As a user I want to be able to edit task cards</strong></span>" +
+    "<span style='float: right'>8 Hrs<br><span>Priority: 3</span><br><span style='bottom: 10px'>UNCLAIMED</span></span></div>");
+
   document.getElementById("numIncomplete").innerHTML = "(" + index + ")";
 }
 
