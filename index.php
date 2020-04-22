@@ -49,6 +49,16 @@ switch ($action) {
         break;
     case 'POST_LOGIN':
         //TODO: add login validation here, if success return to homepage. nav should update automatically
+        $username = filter_input(INPUT_POST, "txtUsername");
+        $password = filter_input(INPUT_POST, "txtPassword");
+        if(UserEndpoint::login($username, $password)) {
+            include("views/homeView.php");
+            die();
+            break;
+        } else {
+            $errorMsg = "Invalid username or password";
+            include("views/login.php");
+        }
         break;
     case 'GET_SIGNUP':
         include("views/signup.php");
