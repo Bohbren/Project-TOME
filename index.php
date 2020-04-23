@@ -109,5 +109,10 @@ switch ($action) {
         include("views/chat.php");
         die();
         break;
+    case 'calendar':
+        
+        include("views/calendar.php");
+        die();
+        break;
 }
 ?>

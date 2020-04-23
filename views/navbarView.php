@@ -19,6 +19,7 @@
                 </li>
                 <li><a href="index.php?action=taskBoard">Task Board</a></li>
                 <li><a href="index.php?action=chat">Chat</a></li>
+                <li><a href="index.php?action=calendar">Calendar</a></li>
             </ul>
         </div>
     </nav>
