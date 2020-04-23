@@ -10,23 +10,16 @@
                         <a class="navbar-brand" href="#"><?php echo $user->getUsername(); ?></a>
                     </li>
                 <?php } ?>
-                <li class="dropdown">
-                    <a class="dropdown-toggle" data-toggle="dropdown" href="#" style="color:white;">Login/Register<span class="caret"></span></a>
-                    <ul class="dropdown-menu">
-                        <li><a href="index.php?action=taskBoard" style="color:white;">Task Board</a></li>
-                        <li><a href="index.php?action=GET_LOGIN" style="color:white;">Login</a></li>
-                        <li><a href="index.php?action=GET_SIGNUP" style="color:white;">Register</a></li>
-                    </ul>
-                </li>
+                <li><a href="index.php?action=chat" style="color:white;">Chat</a></li>
+                <li><a href="index.php?action=calendar" style="color:white;">Calendar</a></li>
                 <li><a href="index.php?action=taskBoard" style="color:white;">Task Board</a></li>
                 <li><a href="index.php?action=chat" style="color:white;">Chat</a></li>
                         <li><a href="index.php?action=GET_LOGIN">Login</a></li>
                         <li><a href="index.php?action=GET_SIGNUP">Register</a></li>
                     </ul>
+         
                 </li>
-                <li><a href="index.php?action=taskBoard">Task Board</a></li>
-                <li><a href="index.php?action=chat">Chat</a></li>
-                <li><a href="index.php?action=calendar">Calendar</a></li>
+          
             </ul>
         </div>
     </nav>
