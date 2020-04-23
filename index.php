@@ -19,6 +19,9 @@ session_start();
 if (empty($_SESSION['user'])) {
     $_SESSION['user'] = "";
 }
+if (!isset($_SESSION['user_id'])) {
+    $_SESSION['user_id'] = '';
+}
 
 //Defines the action statement used for the switch statement - and then takes you to 
 //the desired page
@@ -49,6 +52,16 @@ switch ($action) {
         break;
     case 'POST_LOGIN':
         //TODO: add login validation here, if success return to homepage. nav should update automatically
+        $username = filter_input(INPUT_POST, "txtUsername");
+        $password = filter_input(INPUT_POST, "txtPassword");
+        if(UserEndpoint::login($username, $password)) {
+            include("views/homeView.php");
+            die();
+            break;
+        } else {
+            $errorMsg = "Invalid username or password";
+            include("views/login.php");
+        }
         break;
     case 'GET_SIGNUP':
         include("views/signup.php");
@@ -91,7 +104,14 @@ switch ($action) {
         die();
         break;
      case 'chat':
+        $db = UserEndpoint::getUserBySessionId($_SESSION["sessionid"] );
+         $_SESSION['user_id'] = $db->getUserID();
         include("views/chat.php");
+        die();
+        break;
+    case 'calendar':
+        
+        include("views/calendar.php");
         die();
         break;
 }
