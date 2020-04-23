@@ -8,7 +8,7 @@
   clear: both;
 }
 
-.notecard {
+.task {
   background-color: rgb(250, 48, 75);
   height: 80px;
   max-height: 100px;
@@ -33,7 +33,7 @@
   margin: 20px;
 }
 
-.notecard:hover {
+.task:hover {
   transform: scale(1.1);
 }
 
@@ -54,8 +54,9 @@
 
 .emptyBoards {
   border-top: solid black 0px;
-  border-left: solid black 5px;
-  border-right: solid black 5px;
+  border-left: solid black 2.5px;
+  border-right: solid black 2.5px;
+  border-bottom: solid black 2.5px;
   width: 33.33%;
   height: 600px;
   overflow-y: scroll;
@@ -63,20 +64,20 @@
   margin: 0 auto;
   float: right;
   padding: 5px;
-  background-color: #eef5db;
+  background-color: rgb(236, 236, 236);
 
 }
 
 .headerHolder {
-  border-top: solid black 5px;
-  border-left: solid black 5px;
-  border-right: solid black 5px;
+  border-top: solid black 2.5px;
+  border-left: solid black 2.5px;
+  border-right: solid black 2.5px;
   width: 33.33%;
   height: 100%;
   margin: 0 auto;
   float: right;
   padding: 5px;
-  background-color: #eef5db;
+  background-color: rgb(236, 236, 236);
 }
 
 .headers {

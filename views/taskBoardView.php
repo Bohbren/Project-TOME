@@ -9,14 +9,14 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
     <link rel="stylesheet" href="style.css">
-    <title>Draggable Notecards Test</title>
+    <title>Draggable Tasks Test</title>
 </head>
 
 <body>
     <?php include('navbarView.php'); ?>
     <div class="boardInformation">
         <h2>Board Information: </h2>
-        <!-- Call from databasse for each card under a project, add up all tasks hours in a loop, outputting it here -->
+        <!-- Call from databasse for each task under a project, add up all tasks hours in a loop, outputting it here -->
         <p>Calculated Hours: 55</p>
         <!-- Call from database looping to see how many users are assigned to this specific project -->
         <p>Users Working: 5</p>
@@ -36,21 +36,21 @@
         </div>
         <div class="headerHolder">
             <div class="headers">
-                <h1>Incomplete<span id="numIncomplete" style="float: right"></span></h1>
+                <h1><button id="btnAddTask" alt="Add another Task" style="float: left;">+</button>Incomplete<span
+                        id="numIncomplete" style="float: right"></span></h1>
             </div>
         </div>
     </div>
     <div class="boardLayout">
-        <div id="slot1" class="emptyBoards" ondrop="dropCard(event)" ondragover="allowCardDrop(event)">
+        <div id="slot1" class="emptyBoards" ondrop="droptask(event)" ondragover="allowtaskDrop(event)">
         </div>
-        <div id="slot2" class="emptyBoards" ondrop="dropCard(event)" ondragover="allowCardDrop(event)">
+        <div id="slot2" class="emptyBoards" ondrop="droptask(event)" ondragover="allowtaskDrop(event)">
 
         </div>
-        <div id="slot3" class="emptyBoards" ondrop="dropCard(event)" ondragover="allowCardDrop(event)">
+        <div id="slot3" class="emptyBoards" ondrop="droptask(event)" ondragover="allowtaskDrop(event)">
 
         </div>
     </div>
-    <!-- Trigger/Open The Modal -->
 
     <!-- The Modal -->
     <div id="myPopupBox" class="popupBox">
@@ -58,9 +58,9 @@
         <div class="modal-content">
             <span class="closeButton">&times;</span>
             <div class="insidePopupBox">
-                <label>Card Name: </label><br>
+                <label>Task Name: </label><br>
                 <input type="text"><br>
-                <label>Card Description: </label><br>
+                <label>Task Description: </label><br>
                 <textarea></textarea><br>
                 <button>Save</button><br><br>
 
