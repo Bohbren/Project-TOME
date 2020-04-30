@@ -27,23 +27,16 @@ function createTaskBoard() {
   //generates the tasks on page load - this will call from a db in the future
   let index = 3;
   $('#slot3').append("<div class='task' style='background-color: white' value = " + index + " id=task1" +
-    " draggable='true' ondragstart='dragtaskStart(event)'onClick='openChangeTask(event)'><span><strong>As a user I want to make task tasks</strong></span>" +
+    " draggable='true' ondragstart='dragtaskStart(event)'onClick='openChangeTask(event)'><span><strong>I am a Common Priority task</strong></span>" +
     "<span style='float: right'>5 Hrs<br><span>Priority: 1</span><br><span style='bottom: 10px'>UNCLAIMED</span></span></div>");
 
-
   $('#slot3').append("<div class='task' style='background-color: yellow' value = " + index + " id=task2" +
-    " draggable='true' ondragstart='dragtaskStart(event)'onClick='openChangeTask(event)'><span><strong>As an admin I want to make projects</strong></span>" +
+    " draggable='true' ondragstart='dragtaskStart(event)'onClick='openChangeTask(event)'><span><strong>I am a High Priority task</strong></span>" +
     "<span style='float: right'>16 Hrs<br><span>Priority: 2</span><br><span style='bottom: 10px'>UNCLAIMED</span></span></div>");
 
-
   $('#slot3').append("<div class='task' value = " + index + " id=task3" +
-    " draggable='true' ondragstart='dragtaskStart(event)'onClick='openChangeTask(event)'><span><strong>As a user I want to be able to edit task tasks</strong></span>" +
+    " draggable='true' ondragstart='dragtaskStart(event)'onClick='openChangeTask(event)'><span><strong>I am a Critical Priority task</strong></span>" +
     "<span style='float: right'>8 Hrs<br><span>Priority: 3</span><br><span style='bottom: 10px'>UNCLAIMED</span></span></div>");
-
-  $('#slot3').append("<div class='task' style='background-color: yellow' value = " + index + " id=task4" +
-    " draggable='true' ondragstart='dragtaskStart(event)'onClick='openChangeTask(event)'><span><strong>As a user I want to be able to edit task tasks</strong></span>" +
-    "<span style='float: right'>8 Hrs<br><span>Priority: 3</span><br><span style='bottom: 10px'>UNCLAIMED</span></span></div>");
-
 }
 
 function allowtaskDrop(ev) {

@@ -69,13 +69,14 @@
                     <div class="taskColumn">
                         <label>Claim this task?</label><br>
                         <select id="userClaims">
-                            <!-- Grab users from list of users in DB associated with this specific project number. Loop and display below -->
-                            <option value="">Brendan</option>
-                            <option value="">Luther</option>
-                            <option value="">Dan</option>
-                            <option value="">Bryan</option>
-                            <option value="">These values will be dynamically generated and pulled from DB</option>
-                        </select>
+                    <!-- Grab users from list of users in DB associated with this specific project number. Loop and display below -->
+                    <?php
+                        $users = UserEndpoint::getAllUsers();
+                        foreach ($users as $user) {
+                            echo '<option value="' . $user->getUserID() . '">' . $user->getFirstName() . " " . $user->getLastName() . "</option>";
+                        }
+                    ?>
+                </select>
                     </div>
                 </div>
                 <div style="text-align: center;"> <button id="btnEditTask">Save Task</button></div>
@@ -89,7 +90,7 @@
         <!-- task content -->
         <div class="editTaskBox-content"> <span class="closeButton">&times;</span>
 
-            <div class="insideEditTaskBox">
+        <div class="insideEditTaskBox">
                 <h2>CREATE NEW TASK</h2>
                 <div class="taskRow">
                     <div class="taskColumn">
@@ -105,14 +106,15 @@
                     </div>
                     <div class="taskColumn">
                         <label>Claim this task?</label><br>
-                        <select id="userClaimed">
-                            <!-- Grab users from list of users in DB associated with this specific project number. Loop and display below -->
-                            <option value="Brendan">Brendan</option>
-                            <option value="Luther">Luther</option>
-                            <option value="Dan">Dan</option>
-                            <option value="Bryan">Bryan</option>
-                            <option value="test">These values will be dynamically generated and pulled from DB</option>
-                        </select>
+                        <select id="userClaims">
+                    <!-- Grab users from list of users in DB associated with this specific project number. Loop and display below -->
+                    <?php
+                        $users = UserEndpoint::getAllUsers();
+                        foreach ($users as $user) {
+                            echo '<option value="' . $user->getUserID() . '">' . $user->getFirstName() . " " . $user->getLastName() . "</option>";
+                        }
+                    ?>
+                </select>
                     </div>
                 </div>
                 <div style="text-align: center;"> <button id="btnCreateTask">Create Task</button></div>
