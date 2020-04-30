@@ -8,14 +8,16 @@ class Workitem {
     private $claimedByUser;
     private $lastModifiedOn;
     private $itemStatus;
+    private $priority;
     
-    public function __construct($workItemID, $itemName, $itemDescription, $claimedByUser, $lastModifiedOn, $itemStatus) {
+    public function __construct($workItemID, $itemName, $itemDescription, $claimedByUser, $lastModifiedOn, $itemStatus, $priority) {
         $this->workItemID = $workItemID;
         $this->claimedByUser = $claimedByUser;
         $this->itemDescription = $itemDescription;
         $this->itemName = $itemName;
         $this->lastModifiedOn = $lastModifiedOn;
         $this->itemStatus = $itemStatus;
+        $this->priority = $priority;
     }
     
     function getWorkItemID() {
@@ -65,5 +67,15 @@ class Workitem {
     function setItemStatus($itemStatus) {
         $this->itemStatus = $itemStatus;
     }
+    
+    function getPriority() {
+        return $this->priority;
+    }
+
+    function setPriority($priority) {
+        $this->priority = $priority;
+    }
+
+
     
 }
