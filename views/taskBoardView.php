@@ -70,11 +70,12 @@
                 <label>Claim this story?</label><br>
                 <select id="userClaims">
                     <!-- Grab users from list of users in DB associated with this specific project number. Loop and display below -->
-                    <option value="">Brendan</option>
-                    <option value="">Luther</option>
-                    <option value="">Dan</option>
-                    <option value="">Bryan</option>
-                    <option value="">These values will be dynamically generated and pulled from DB</option>
+                    <?php
+                        $users = UserEndpoint::getAllUsers();
+                        foreach ($users as $user) {
+                            echo '<option value="' . $user->getUserID() . '">' . $user->getFirstName() . " " . $user->getLastName() . "</option>";
+                        }
+                    ?>
                 </select>
                 <button>Claim</button><br>
             </div>

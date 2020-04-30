@@ -64,4 +64,18 @@ class UserEndpoint {
         return null;
     }
     
+    public static function getAllUsers() {
+        $query = "SELECT * FROM userinfo";
+        $db = Database::getDB();
+        $stmt = $db->prepare($query);
+        $stmt->execute();
+        $results = $stmt->fetchAll();
+        $users = array();
+        foreach ($results as $u) {
+            $user = new User($u["userID"], $u["username"], "", null, $u["firstName"], $u["lastName"], $u["emailAddress"]);
+            array_push($users, $user);
+        }
+        return $users;
+    }
+    
 }
