@@ -26,57 +26,96 @@
     <div class="headerLayout">
         <div class="headerHolder">
             <div class="headers">
-                <h1>Completed <span style="float: right">(0)</span></h1>
+                <h1>Complete<span id="numComplete" style="float: right"></span></h1>
             </div>
         </div>
         <div class="headerHolder">
             <div class="headers">
-                <h1>In Progress<span style="float: right">(0)</span></h1>
+                <h1>In Progress<span id="numInProgress" style="float: right"></span></h1>
             </div>
         </div>
         <div class="headerHolder">
             <div class="headers">
-                <h1><button id="btnAddTask" alt="Add another Task" style="float: left;">+</button>Incomplete<span
-                        id="numIncomplete" style="float: right"></span></h1>
+                <h1><button id="btnAddTask" alt="Add another Task" style="float: left;"
+                        onClick="openCreateTask(event)">+</button>Incomplete<span id="numIncomplete"
+                        style="float: right"></span></h1>
             </div>
         </div>
     </div>
     <div class="boardLayout">
-        <div id="slot1" class="emptyBoards" ondrop="droptask(event)" ondragover="allowtaskDrop(event)">
-        </div>
-        <div id="slot2" class="emptyBoards" ondrop="droptask(event)" ondragover="allowtaskDrop(event)">
-
-        </div>
-        <div id="slot3" class="emptyBoards" ondrop="droptask(event)" ondragover="allowtaskDrop(event)">
-
-        </div>
+        <div id="slot1" class="emptyBoards" ondrop="droptask(event)" ondragover="allowtaskDrop(event)"></div>
+        <div id="slot2" class="emptyBoards" ondrop="droptask(event)" ondragover="allowtaskDrop(event)"></div>
+        <div id="slot3" class="emptyBoards" ondrop="droptask(event)" ondragover="allowtaskDrop(event)"></div>
     </div>
 
-    <!-- The Modal -->
-    <div id="myPopupBox" class="popupBox">
-        <!-- Modal content -->
-        <div class="modal-content">
-            <span class="closeButton">&times;</span>
-            <div class="insidePopupBox">
-                <label>Task Name: </label><br>
-                <input type="text"><br>
-                <label>Task Description: </label><br>
-                <textarea></textarea><br>
-                <button>Save</button><br><br>
+    <!-- The popup box that allows you to edit tasks -->
+    <div id="editTaskBox" class="editTaskBox">
+        <!-- task content -->
+        <div class="editTaskBox-content"> <span class="closeButton">&times;</span>
+            <div class="insideEditTaskBox">
+                <h2>EDIT TASK</h2>
+                <div class="taskRow">
+                    <div class="taskColumn">
+                        <label>Task Description: </label><br>
+                        <textarea></textarea><br>
+                        <label>Priority</label><br>
+                        <input type="radio" id="1" name="priority" value="1">
+                        <label for="1">1 - Critical</label><br>
+                        <input type="radio" id="2" name="priority" value="2">
+                        <label for="2">2 - High</label><br>
+                        <input type="radio" id="3" name="priority" value="3">
+                        <label for="3">3 - Common</label><br>
+                    </div>
+                    <div class="taskColumn">
+                        <label>Claim this task?</label><br>
+                        <select id="userClaims">
+                            <!-- Grab users from list of users in DB associated with this specific project number. Loop and display below -->
+                            <option value="">Brendan</option>
+                            <option value="">Luther</option>
+                            <option value="">Dan</option>
+                            <option value="">Bryan</option>
+                            <option value="">These values will be dynamically generated and pulled from DB</option>
+                        </select>
+                    </div>
+                </div>
+                <div style="text-align: center;"> <button id="btnEditTask">Save Task</button></div>
+            </div>
+        </div>
+    </div>
+    </div>
 
-                <label>Claimed by: </label>
-                <!-- Check if claimed in db, determined by a value of 0 or 1. -->
-                <p>UNCLAIMED</p><br><br>
-                <label>Claim this story?</label><br>
-                <select id="userClaims">
-                    <!-- Grab users from list of users in DB associated with this specific project number. Loop and display below -->
-                    <option value="">Brendan</option>
-                    <option value="">Luther</option>
-                    <option value="">Dan</option>
-                    <option value="">Bryan</option>
-                    <option value="">These values will be dynamically generated and pulled from DB</option>
-                </select>
-                <button>Claim</button><br>
+    <!-- The popup box that allows you to create tasks -->
+    <div id="createTaskBox" class="editTaskBox">
+        <!-- task content -->
+        <div class="editTaskBox-content"> <span class="closeButton">&times;</span>
+
+            <div class="insideEditTaskBox">
+                <h2>CREATE NEW TASK</h2>
+                <div class="taskRow">
+                    <div class="taskColumn">
+                        <label>Task Description: </label><br>
+                        <textarea id="taskDescription"></textarea><br>
+                        <label>Priority</label><br>
+                        <input type="radio" id="1" name="priority" value="1">
+                        <label for="1">1 - Critical</label><br>
+                        <input type="radio" id="2" name="priority" value="2">
+                        <label for="2">2 - High</label><br>
+                        <input type="radio" id="3" name="priority" value="3">
+                        <label for="3">3 - Common</label><br>
+                    </div>
+                    <div class="taskColumn">
+                        <label>Claim this task?</label><br>
+                        <select id="userClaimed">
+                            <!-- Grab users from list of users in DB associated with this specific project number. Loop and display below -->
+                            <option value="Brendan">Brendan</option>
+                            <option value="Luther">Luther</option>
+                            <option value="Dan">Dan</option>
+                            <option value="Bryan">Bryan</option>
+                            <option value="test">These values will be dynamically generated and pulled from DB</option>
+                        </select>
+                    </div>
+                </div>
+                <div style="text-align: center;"> <button id="btnCreateTask">Create Task</button></div>
             </div>
         </div>
     </div>
