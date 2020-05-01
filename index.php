@@ -103,6 +103,12 @@ switch ($action) {
         }
         die();
         break;
+    case 'GET_LOGOUT':
+        $_SESSION['sessionid'] = "";
+
+        include('views/homeView.php');
+        die();
+        break;
      case 'chat':
         $db = UserEndpoint::getUserBySessionId($_SESSION["sessionid"] );
          $_SESSION['user_id'] = $db->getUserID();

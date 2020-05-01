@@ -1,6 +1,5 @@
 ﻿<!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -9,19 +8,30 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
     <link rel="stylesheet" href="style.css">
-    <title>Draggable Tasks Test</title>
+    <title>Task Board</title>
 </head>
 
 <body>
-    <?php include('navbarView.php'); ?>
+<?php include('navbarView.php'); ?>
     <div class="boardInformation">
         <h2>Board Information: </h2>
         <!-- Call from databasse for each task under a project, add up all tasks hours in a loop, outputting it here -->
-        <p>Calculated Hours: 55</p>
+        <p>Calculated Hours: 55
+        <span style="float: right">     <label>Project</label>     <select id="userClaims">
+                    <!-- Grab users from list of users in DB associated with this specific project number. Loop and display below -->
+                    <?php
+                        $users = UserEndpoint::getAllUsers();
+                        foreach ($users as $user) {
+                            echo '<option value="' . $user->getUserID() . '">' . $user->getFirstName() . " " . $user->getLastName() . "</option>";
+                        }
+                    ?>
+                </select></span>
+        </p>
         <!-- Call from database looping to see how many users are assigned to this specific project -->
         <p>Users Working: 5</p>
         <!-- Algorithm assuming 8 hour work day, calculate how many hours there are with all tasks put together. Calculate days from that. Display date -->
-        <p>Calculated Completion Date: April 7, 2020</p>
+        <p>Calculated Completion Date: April 7, 2020</p>        
+
     </div>
     <div class="headerLayout">
         <div class="headerHolder">
