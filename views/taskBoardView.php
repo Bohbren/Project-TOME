@@ -121,9 +121,17 @@
                     <?php
                         $users = UserEndpoint::getAllUsers();
                         foreach ($users as $user) {
-                            echo '<option value="' . $user->getUserID() . '">' . $user->getFirstName() . " " . $user->getLastName() . "</option>";
+                            echo '<option value="' . $user->getFirstName() . " " . $user->getLastName() . '">' . $user->getFirstName() . " " . $user->getLastName() . "</option>";
                         }
                     ?>
+                </select><br><br>
+                <label>Estimated Hours</label><br>
+                <select id="estimatedHours">
+                <option value="?">?</option>
+                <?php 
+                    for($i = 1; $i < 100; $i++) {?>
+                    <option value="<?php echo $i;?>"><?php echo $i;?></option>    
+                <?php } ?>
                 </select>
                     </div>
                 </div>

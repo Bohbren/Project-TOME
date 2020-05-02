@@ -14,9 +14,9 @@ $(document).ready(function () {
 
 //Checks the amount of tasks in each section
 function taskCount() {
-  var incompleteTasks = $("#slot3 div").length;
-  var inProgressTasks = $("#slot2 div").length;
-  var completeTasks = $("#slot1 div").length;
+  var incompleteTasks = $("#slot3 .task").length;
+  var inProgressTasks = $("#slot2 .task").length;
+  var completeTasks = $("#slot1 .task").length;
 
   document.getElementById("numIncomplete").innerHTML = "(" + incompleteTasks + ")";
   document.getElementById("numInProgress").innerHTML = "(" + inProgressTasks + ")";
@@ -28,15 +28,15 @@ function createTaskBoard() {
   let index = 3;
   $('#slot3').append("<div class='task' style='background-color: white' value = " + index + " id=task1" +
     " draggable='true' ondragstart='dragtaskStart(event)'onClick='openChangeTask(event)'><span><strong>I am a Common Priority task</strong></span>" +
-    "<span style='float: right'>5 Hrs<br><span>Priority: 1</span><br><span style='bottom: 10px'>UNCLAIMED</span></span></div>");
+    "<span style='position: absolute; right: 0; bottom: 0; padding-right: 5px;'><em><span>8 Hrs<span style='padding-left:20px;'>Priority: 1</span> <span style='padding-left:20px;'>UNCLAIMED</span></span></em></span></div>");
 
   $('#slot3').append("<div class='task' style='background-color: yellow' value = " + index + " id=task2" +
     " draggable='true' ondragstart='dragtaskStart(event)'onClick='openChangeTask(event)'><span><strong>I am a High Priority task</strong></span>" +
-    "<span style='float: right'>16 Hrs<br><span>Priority: 2</span><br><span style='bottom: 10px'>UNCLAIMED</span></span></div>");
+    "<span style='position: absolute; right: 0; bottom: 0; padding-right: 5px;'><em><span>8 Hrs<span style='padding-left:20px;'>Priority: 2</span> <span style='padding-left:20px;'>UNCLAIMED</span></span></em></span></div>");
 
   $('#slot3').append("<div class='task' value = " + index + " id=task3" +
     " draggable='true' ondragstart='dragtaskStart(event)'onClick='openChangeTask(event)'><span><strong>I am a Critical Priority task</strong></span>" +
-    "<span style='float: right'>8 Hrs<br><span>Priority: 3</span><br><span style='bottom: 10px'>UNCLAIMED</span></span></div>");
+    "<span style='position: absolute; right: 0; bottom: 0; padding-right: 5px;'><em><span>8 Hrs<span style='padding-left:20px;'>Priority: 3</span> <span style='padding-left:20px;'>UNCLAIMED</span></span></em></span></div>");
 }
 
 function allowtaskDrop(ev) {
@@ -110,10 +110,12 @@ document.getElementById("btnCreateTask").addEventListener("click", function() {
   var priority = $("input[name=priority]:checked").val(); 
   var userClaimed = $("#userClaimed").val();
   var color = "null";
+  var estimatedHours = $("#estimatedHours").val();
 
   console.log("Task Description: " + taskDescription);
   console.log("Priority: " + priority);
   console.log("User Claimed: " + userClaimed);
+  console.log("Estimated Hours: " + estimatedHours);
 
   //Check to see what priority is selected
   switch (priority) {
@@ -133,8 +135,8 @@ document.getElementById("btnCreateTask").addEventListener("click", function() {
 
 
   $('#slot3').append("<div class='task' style='background-color: "+ color +"' value = " + tempCounter + " id="+ tempCounter++ +"" +
-    " draggable='true' ondragstart='dragtaskStart(event)'onClick='openChangeTask(event)'><span><strong>" + taskDescription + "</strong></span>" +
-    "<span style='float: right'>8 Hrs<br><span>Priority: "+ priority +"</span><br><span style='bottom: 10px'>"+ userClaimed + "</span></span></div>");
+    " draggable='true' ondragstart='dragtaskStart(event)'onClick='openChangeTask(event)'><span style='margin-bottom: 20px;'><strong>" + taskDescription + "</strong></span>" +
+    "<div style='position: absolute; right: 0; bottom: 0; padding-right: 5px; margin-top:auto;><em><span>" + estimatedHours +" Hrs</span><span style='padding-left:20px;'>Priority: "+ priority +"</span><span style='padding-left:20px;'>"+ userClaimed + "</span></span></em></div></div>");
 
   createTaskBox.style.display = "none";
   taskCount();

@@ -10,14 +10,15 @@
 
 .task {
   background-color: rgb(250, 48, 75);
-  height: 80px;
-  max-height: 100px;
+  height: auto;
+  min-height: 85px;
   width: 90%;
   margin: 0 auto;
   border: solid black 3px;
   box-shadow: 1px 2px 4px rgba(0, 0, 0, .5);
   cursor: pointer;
   padding: 5px;
+  position: relative;
 }
 
 .emptyColumn {
