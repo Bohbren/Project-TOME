@@ -15,9 +15,10 @@
         </ul>
         <ul class="nav navbar-nav navbar-right">
             <?php
+            $user = UserEndpoint::getUserBySessionId($_SESSION["sessionid"]);
             //If the player is logged in it will display their name to go to their profile, if not logged in it
             //displays an option to register or login.
-            if ($_SESSION["sessionid"] === "") {
+            if ($_SESSION["sessionid"] === "" || $user->getUsername() === NULL) {
                 ?>
             <li><a href="index.php?action=GET_SIGNUP" class="menuButtons">Register</a></li>
             <li><a href="index.php?action=GET_LOGIN" class="menuButtons">Login</a></li>

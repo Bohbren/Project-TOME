@@ -132,13 +132,42 @@ document.getElementById("btnCreateTask").addEventListener("click", function() {
       color = "white";
       break;
   }
-
-
-  $('#slot3').append("<div class='task' style='background-color: "+ color +"' value = " + tempCounter + " id="+ tempCounter++ +"" +
+  if(validateTaskCreation(taskDescription) == false) {
+    $('#slot3').append("<div class='task' style='background-color: "+ color +"' value = " + tempCounter + " id="+ tempCounter++ +"" +
     " draggable='true' ondragstart='dragtaskStart(event)'onClick='openChangeTask(event)'><span style='margin-bottom: 20px;'><strong>" + taskDescription + "</strong></span>" +
     "<div style='position: absolute; right: 0; bottom: 0; padding-right: 5px; margin-top:auto;><em><span>" + estimatedHours +" Hrs</span><span style='padding-left:20px;'>Priority: "+ priority +"</span><span style='padding-left:20px;'>"+ userClaimed + "</span></span></em></div></div>");
 
+
   createTaskBox.style.display = "none";
   taskCount();
+  }
+  else {
+    alert("wrong");
+  }
+
+  
 });
+
+//validation for creating a new task - clientside
+function validateTaskCreation(taskDescription) {
+  
+  if(taskDescription === "" || taskDescription == NULL) {
+    $("#descriptionError").style.display = "block";
+    alert("description is false");
+    return false;
+  }
+  else {
+    $("#descriptionError").style.display = "none";
+    alert("description is true");
+    return true;
+  }
+  // if(priority === "" || priority == NULL) {
+  //   $("#priorityError").style.display = "block";
+  //   return false;
+  // }
+  // else {
+  //   $("#priorityError").style.display = "none";
+  //   return true;
+  // }
+}
 

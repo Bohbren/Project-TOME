@@ -4,10 +4,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta charset="utf-8">
+    <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
-    <link rel="stylesheet" href="style.css">
     <title>Task Board</title>
 </head>
 
@@ -66,7 +66,7 @@
                 <h2>EDIT TASK</h2>
                 <div class="taskRow">
                     <div class="taskColumn">
-                        <label>Task Description: </label><br>
+                        <label>Task Description: <span style="color:red;">You must enter a description</span></label><br>
                         <textarea></textarea><br>
                         <label>Priority</label><br>
                         <input type="radio" id="1" name="priority" value="1">
@@ -104,9 +104,9 @@
                 <h2>CREATE NEW TASK</h2>
                 <div class="taskRow">
                     <div class="taskColumn">
-                        <label>Task Description: </label><br>
+                    <label>Task Description <span id="descriptionError" style="color:red; display: none;">You must enter a description</span></label><br>
                         <textarea id="taskDescription"></textarea><br>
-                        <label>Priority</label><br>
+                        <label>Priority <span id="priorityError" style="color:red; display: none;">You must select a priority</span></label><br>
                         <input type="radio" id="1" name="priority" value="1">
                         <label for="1">1 - Critical</label><br>
                         <input type="radio" id="2" name="priority" value="2">
