@@ -107,9 +107,9 @@ document.getElementById("btnCreateTask").addEventListener("click", function() {
   console.log("Create task button clicked");
 
   var taskDescription = $("#taskDescription").val();
-  var priority = $("input[name=priority]:checked").val(); 
-  var userClaimed = $("#userClaimed").val();
-  var color = "null";
+  var priority = document.querySelector('input[name="priority"]:checked'); 
+  var userClaimed = $("#userClaims :selected").text();
+  var color = null;
   var estimatedHours = $("#estimatedHours").val();
 
   console.log("Task Description: " + taskDescription);
@@ -132,42 +132,37 @@ document.getElementById("btnCreateTask").addEventListener("click", function() {
       color = "white";
       break;
   }
-  if(validateTaskCreation(taskDescription) == false) {
-    $('#slot3').append("<div class='task' style='background-color: "+ color +"' value = " + tempCounter + " id="+ tempCounter++ +"" +
-    " draggable='true' ondragstart='dragtaskStart(event)'onClick='openChangeTask(event)'><span style='margin-bottom: 20px;'><strong>" + taskDescription + "</strong></span>" +
-    "<div style='position: absolute; right: 0; bottom: 0; padding-right: 5px; margin-top:auto;><em><span>" + estimatedHours +" Hrs</span><span style='padding-left:20px;'>Priority: "+ priority +"</span><span style='padding-left:20px;'>"+ userClaimed + "</span></span></em></div></div>");
+  if(validTaskCreation(taskDescription, priority)) {
+    console.log("the user: " + userClaimed);
+    $('#slot3').append("<div class='task' value = " + tempCounter + " id="+ tempCounter++ + 
+    " draggable='true' ondragstart='dragtaskStart(event)'onClick='openChangeTask(event)'><span><strong>" + taskDescription + "</strong></span>" +
+    "<span style='position: absolute; right: 0; bottom: 0; padding-right: 5px;'><em><span>" + estimatedHours + " Hrs<span style='padding-left:20px;'>Priority: " + priority.value + "</span>" +
+    "<span style='padding-left:20px;'>" + userClaimed + "</span></span></em></span></div>");
 
-
-  createTaskBox.style.display = "none";
-  taskCount();
+    createTaskBox.style.display = "none";
+    taskCount();
   }
   else {
-    alert("wrong");
+    createTaskBox.style.display = "block";
+    taskCount();
   }
-
-  
 });
 
 //validation for creating a new task - clientside
-function validateTaskCreation(taskDescription) {
-  
-  if(taskDescription === "" || taskDescription == NULL) {
-    $("#descriptionError").style.display = "block";
-    alert("description is false");
+function validTaskCreation(taskDescription, priority) {
+  if(taskDescription === "" || taskDescription === null) {
+    document.getElementById("descriptionError").style.display = "inline";
+    return false;
+  }
+  else if(priority === null) {
+    document.getElementById("priorityError").style.display = "inline";
     return false;
   }
   else {
-    $("#descriptionError").style.display = "none";
-    alert("description is true");
+    document.getElementById("descriptionError").style.display = "none";
+    document.getElementById("priorityError").style.display = "none";
     return true;
   }
-  // if(priority === "" || priority == NULL) {
-  //   $("#priorityError").style.display = "block";
-  //   return false;
-  // }
-  // else {
-  //   $("#priorityError").style.display = "none";
-  //   return true;
-  // }
+
 }
 
