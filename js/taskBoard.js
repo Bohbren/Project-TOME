@@ -60,8 +60,6 @@ function droptask(ev) {
 
   //Checks to see if there is an task in the slot. If there is, it will replace it with the new one.
   if (targetElement.className === sourcetaskSlot.className) {
-    //Removes the current task and replaces it with the new one
-    targetParentElement.removeChild(targetElement);
     targetParentElement.appendChild(sourcetaskSlot);
   } else {
     // Append to the list
@@ -118,7 +116,7 @@ document.getElementById("btnCreateTask").addEventListener("click", function() {
   console.log("Estimated Hours: " + estimatedHours);
 
   //Check to see what priority is selected
-  switch (priority) {
+  switch (priority.value) {
     case "1":
       color = "rgb(250, 48, 75)";
       break;
@@ -134,7 +132,7 @@ document.getElementById("btnCreateTask").addEventListener("click", function() {
   }
   if(validTaskCreation(taskDescription, priority)) {
     console.log("the user: " + userClaimed);
-    $('#slot3').append("<div class='task' value = " + tempCounter + " id="+ tempCounter++ + 
+    $('#slot3').append("<div style='background-color:" + color + ";' class='task' value = " + tempCounter + " id="+ tempCounter++ + 
     " draggable='true' ondragstart='dragtaskStart(event)'onClick='openChangeTask(event)'><span><strong>" + taskDescription + "</strong></span>" +
     "<span style='position: absolute; right: 0; bottom: 0; padding-right: 5px;'><em><span>" + estimatedHours + " Hrs<span style='padding-left:20px;'>Priority: " + priority.value + "</span>" +
     "<span style='padding-left:20px;'>" + userClaimed + "</span></span></em></span></div>");
