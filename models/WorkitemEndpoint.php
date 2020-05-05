@@ -13,7 +13,7 @@ class WorkitemEndpoint {
         $stmt->execute();
         $results = $stmt->fetchAll();
         foreach ($results as $wi) {
-            $item = new WorkItem($wi["workItemID"], $wi["itemDescription"], $wi["claimedByUser"], $wi["lastModifiedOn"], $wi["itemStatus"], $wi["itemPriority"], $wi["itemHours"]);
+            $item = new WorkItem($wi["workItemID"], $wi["itemDescription"], $wi["claimedByUser"], $wi["lastModifiedOn"], $wi["itemStatus"], $wi["itemPriority"], $wi["itemHours"], $wi["itemName"]);
             array_push($workitems, $item);
         }
         $stmt->closeCursor();
@@ -21,7 +21,7 @@ class WorkitemEndpoint {
     }
     
     public static function addWorkItem($item) {
-        $query = "INSERT INTO workitem(itemDescription, claimedByUser, lastModifiedOn, itemStatus, itemPriority, itemHours) VALUES (:itemdesc, :claimedby, :modifiedon, :status, :priority, :hours)";
+        $query = "INSERT INTO workitem(itemDescription, claimedByUser, lastModifiedOn, itemStatus, itemPriority, itemHours, itemName) VALUES (:itemdesc, :claimedby, :modifiedon, :status, :priority, :hours, :name)";
         $db = Database::getDB();
         $stmt = $db->prepare($query);
         $stmt->bindValue(":itemdesc", $item->getItemDescription());
@@ -30,6 +30,7 @@ class WorkitemEndpoint {
         $stmt->bindValue(":status", $item->getItemStatus());
         $stmt->bindValue(":priority", $item->getPriority());
         $stmt->bindValue(":hours", $item->getHours());
+        $stmt->bindValue(":name", $item->getItemName());
         $stmt->execute();
         $stmt->closeCursor();
     }

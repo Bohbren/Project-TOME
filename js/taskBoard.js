@@ -21,6 +21,18 @@ function taskCount() {
 
 function createTaskBoard() {
     
+    $.ajax({
+        url: "./index.php?action=GET_ALL_WORKITEMS",
+        type: "GET",
+        dataType: "json",
+        success: function(data) {
+            $.each(data, function(idx, item) {
+                createWorkitem(item);
+            });
+            console.log(data);
+        }
+    });
+    
   //generates the tasks on page load - this will call from a db in the future
   let index = 3;
   $('#slot3').append("<div class='task' style='background-color: white' value = " + index + " id=task1" +
@@ -38,6 +50,12 @@ function createTaskBoard() {
 
 function createWorkitem(item) {
     var itemStatus = item.status;
+    var priorityColor = "white";
+    if(item.priority == 2) {
+        priorityColor = "yellow";
+    } else if(item.priority == 3) {
+        priorityColor = "red";
+    }
     var newItem = $("<div>");
     newItem.append("<span><strong>")
     $("#slot" + itemStatus).append(newItem);
@@ -125,14 +143,16 @@ function validTaskCreation(taskDescription, priority) {
 
 $(document).ready(function() {
     $("#btnCreateTask").click(function() {
+        var taskName = $("#newTaskName").val();
         var estHours = $("#estimatedHours").val();
         var claimedUser = $("#userClaims").val();
         var priority = $("input[type=radio]:checked").val();
-        var description = $("#taskDescription").text();
+        var description = $("#taskDescription").val();
         $.ajax({
             url : "./index.php?action=SAVE_WORKITEM",
             type: "POST",
             data: {
+                name: taskName,
                 hours: estHours,
                 claimedBy: claimedUser,
                 priority: priority,

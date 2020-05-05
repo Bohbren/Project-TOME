@@ -63,7 +63,7 @@ include('navbarView.php'); ?>
                 <div class="taskRow">
                     <div class="taskColumn">
                         <label>Task Description: <span style="color:red;">You must enter a description</span></label><br>
-                        <textarea></textarea><br>
+                        <input id="editTaskDesc"/><br>
                         <label>Priority</label><br>
                         <input type="radio" id="1" name="priority" value="1">
                         <label for="1">1 - Critical</label><br>
@@ -100,8 +100,8 @@ include('navbarView.php'); ?>
                 <h2>CREATE NEW TASK</h2>
                 <div class="taskRow">
                     <div class="taskColumn">
-                    <label>Task Description <span id="descriptionError" style="color:red; display: none;">You must enter a description</span></label><br>
-                        <textarea id="taskDescription"></textarea><br>
+                        <label for="newTaskName">Name:</label>
+                        <input type="text" id="newTaskName"/><br>
                         <label>Priority <span id="priorityError" style="color:red; display: none;">You must select a priority</span></label><br>
                         <input type="radio" id="1" name="priority" value="1" checked>
                         <label for="1">1 - Critical</label><br>
@@ -111,6 +111,8 @@ include('navbarView.php'); ?>
                         <label for="3">3 - Common</label><br>
                     </div>
                     <div class="taskColumn">
+                        <label>Task Description <span id="descriptionError" style="color:red; display: none;">You must enter a description</span></label><br>
+                        <input id="taskDescription"/><br>
                         <label>Claim this task?</label><br>
                         <select id="userClaims">
                     <!-- Grab users from list of users in DB associated with this specific project number. Loop and display below -->
