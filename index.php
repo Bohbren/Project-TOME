@@ -105,7 +105,8 @@ switch ($action) {
         break;
     case 'GET_LOGOUT':
         $_SESSION['sessionid'] = "";
-
+        $_SESSION = array();
+        session_destroy();
         include('views/homeView.php');
         die();
         break;

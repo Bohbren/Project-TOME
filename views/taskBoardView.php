@@ -17,15 +17,7 @@
         <h2>Board Information: </h2>
         <!-- Call from databasse for each task under a project, add up all tasks hours in a loop, outputting it here -->
         <p>Calculated Hours: 55
-        <span style="float: right">     <label>Project</label>     <select id="userClaims">
-                    <!-- Grab users from list of users in DB associated with this specific project number. Loop and display below -->
-                    <?php
-                        $users = UserEndpoint::getAllUsers();
-                        foreach ($users as $user) {
-                            echo '<option value="' . $user->getUserID() . '">' . $user->getFirstName() . " " . $user->getLastName() . "</option>";
-                        }
-                    ?>
-                </select></span>
+
         </p>
         <!-- Call from database looping to see how many users are assigned to this specific project -->
         <p>Users Working: 5</p>
@@ -78,7 +70,7 @@
                     </div>
                     <div class="taskColumn">
                         <label>Claim this task?</label><br>
-                        <select id="userClaims">
+                        <select id="editUserClaims">
                     <!-- Grab users from list of users in DB associated with this specific project number. Loop and display below -->
                     <?php
                         $users = UserEndpoint::getAllUsers();
@@ -107,7 +99,7 @@
                     <label>Task Description <span id="descriptionError" style="color:red; display: none;">You must enter a description</span></label><br>
                         <textarea id="taskDescription"></textarea><br>
                         <label>Priority <span id="priorityError" style="color:red; display: none;">You must select a priority</span></label><br>
-                        <input type="radio" id="1" name="priority" value="1">
+                        <input type="radio" id="1" name="priority" value="1" checked>
                         <label for="1">1 - Critical</label><br>
                         <input type="radio" id="2" name="priority" value="2">
                         <label for="2">2 - High</label><br>

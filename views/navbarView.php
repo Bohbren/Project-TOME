@@ -7,13 +7,24 @@
                 ?>
             <li><a href="index.php?action=GET_HOME" class="menuButtons">HOME</a></li>
             <li><a href="index.php?action=taskBoard">Task Board</a></li>
+            <?php
+            if(isset($_SESSION["user"])) {
+                ?>
+            <li><a href="index.php?action=chat">Chat</a></li>
+            <?php }
+            ?>
             </li>
             <?php } else { ?>
             <li><a href="index.php?action=GET_HOME" class="menuButtons">HOME</a></li>
             <?php }
             ?>
         </ul>
+        
+        
         <ul class="nav navbar-nav navbar-right">
+             <?php
+            if(isset($_SESSION["sessionid"])) {
+                ?>
             <?php
             //If the player is logged in it will display their name to go to their profile, if not logged in it
             //displays an option to register or login.
@@ -29,6 +40,11 @@
             <li><a href="index.php?action=GET_LOGOUT" class="menuButtons">Logout</a></li>
             <?php }
                 ?>
+            <?php } else { ?>
+           <li><a href="index.php?action=GET_SIGNUP" class="menuButtons">Register</a></li>
+            <li><a href="index.php?action=GET_LOGIN" class="menuButtons">Login</a></li>
+             <?php }
+            ?>
         </ul>
     </div>
 </nav>

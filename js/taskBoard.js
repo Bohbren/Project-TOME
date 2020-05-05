@@ -2,15 +2,11 @@ var editTaskBox = document.getElementById("editTaskBox");
 var createTaskBox = document.getElementById("createTaskBox");
 var closeButton = document.getElementsByClassName("closeButton")[0];
 var tempCounter = 0;
+
 $(document).ready(function () {
   createTaskBoard();
   taskCount();
 });
-/*
-  I'm trying to think about how I want these assigned to the different columns via the database. Right now I'm thinking of assigning a value of 1-3 to each task based on what column it is
-  placed in. 1=Incomplete 2=In Progress 3=Complete. I'm hoping to use Ajax to not have to refresh the page constantly each time a task task is dropped into a column and it changes the 
-  "columnNum" in the database.
-*/
 
 //Checks the amount of tasks in each section
 function taskCount() {
@@ -138,13 +134,20 @@ document.getElementById("btnCreateTask").addEventListener("click", function() {
     "<span style='padding-left:20px;'>" + userClaimed + "</span></span></em></span></div>");
 
     createTaskBox.style.display = "none";
+    cleanTaskInputs();
     taskCount();
   }
   else {
     createTaskBox.style.display = "block";
     taskCount();
   }
+  taskCount();
 });
+
+//Clean out values from the task creation boxes
+function cleanTaskInputs() {
+  document.getElementById("taskDescription").value = "";
+}
 
 //validation for creating a new task - clientside
 function validTaskCreation(taskDescription, priority) {
