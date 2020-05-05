@@ -62,14 +62,17 @@ include('navbarView.php'); ?>
                 <h2>EDIT TASK</h2>
                 <div class="taskRow">
                     <div class="taskColumn">
+                        <input type="hidden" id="editTaskID"/>
+                        <label for="editTaskName">Name:</label>
+                        <input type="text" id="editTaskName"/><br>
                         <label>Task Description: <span style="color:red;">You must enter a description</span></label><br>
                         <input id="editTaskDesc"/><br>
                         <label>Priority</label><br>
-                        <input type="radio" id="1" name="priority" value="1">
+                        <input type="radio" name="editPriority" value="1">
                         <label for="1">1 - Critical</label><br>
-                        <input type="radio" id="2" name="priority" value="2">
+                        <input type="radio" name="editPriority" value="2">
                         <label for="2">2 - High</label><br>
-                        <input type="radio" id="3" name="priority" value="3">
+                        <input type="radio" name="editPriority" value="3">
                         <label for="3">3 - Common</label><br>
                     </div>
                     <div class="taskColumn">
@@ -82,7 +85,15 @@ include('navbarView.php'); ?>
                             echo '<option value="' . $user->getUserID() . '">' . $user->getFirstName() . " " . $user->getLastName() . "</option>";
                         }
                     ?>
-                </select>
+                        </select><br>
+                    <label>Estimated Hours</label><br>
+                    <select id="editEstimatedHours">
+                    <option value="?">?</option>
+                    <?php 
+                        for($i = 1; $i < 100; $i++) {?>
+                        <option value="<?php echo $i;?>"><?php echo $i;?></option>    
+                    <?php } ?>
+                    </select>
                     </div>
                 </div>
                 <div style="text-align: center;"> <button id="btnEditTask">Save Task</button></div>

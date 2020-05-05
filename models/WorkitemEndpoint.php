@@ -36,13 +36,16 @@ class WorkitemEndpoint {
     }
     
     public static function updateWorkItem($item) {
-        $query = "UPDATE workitem SET itemDescription = :desc, itemPriority = :priority, claimedByUser = :claimedby WHERE workItemID = :id";
+        $query = "UPDATE workitem SET itemDescription = :desc, itemPriority = :priority, claimedByUser = :claimedby, itemName = :name, itemHours = :hours, itemStatus = :status WHERE workItemID = :id";
         $db = Database::getDB();
         $stmt = $db->prepare($query);
         $stmt->bindValue(":desc", $item->getItemDescription());
         $stmt->bindValue(":claimedby", $item->getClaimedByUser());
         $stmt->bindValue(":priority", $item->getPriority());
-        $stmt->bindValue(":id", $item->getWorkItemID());
+        $stmt->bindValue(":id", intval($item->getWorkItemID()));
+        $stmt->bindValue(":name", $item->getItemName());
+        $stmt->bindValue(":hours", $item->getHours());
+        $stmt->bindValue(":status", $item->getItemStatus());
         $stmt->execute();
         $stmt->closeCursor();
     }

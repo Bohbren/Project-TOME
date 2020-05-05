@@ -129,9 +129,15 @@ switch ($action) {
         $priority = filter_input(INPUT_POST, "priority");
         $claimedBy = filter_input(INPUT_POST, "claimedBy");
         $hours = filter_input(INPUT_POST, "hours");
+        $id = filter_input(INPUT_POST, "id");
         $lastModified = date('Y-m-d H:i:s');
-        $workitem = new Workitem(null, $description, $claimedBy, $lastModified, 1, $priority, $hours, $name);
-        WorkitemEndpoint::addWorkItem($workitem);
+        if(!isset($id)) {
+            $workitem = new Workitem(null, $description, $claimedBy, $lastModified, 1, $priority, $hours, $name);
+            WorkitemEndpoint::addWorkItem($workitem);
+        } else {
+            $workitem = new Workitem($id, $description, $claimedBy, $lastModified, 1, $priority, $hours, $name);
+            WorkitemEndpoint::updateWorkItem($workitem);
+        }
         $workitems = WorkitemEndpoint::getWorkItems();
         echo json_encode($workitems);
         die();

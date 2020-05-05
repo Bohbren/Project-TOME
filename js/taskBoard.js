@@ -3,23 +3,26 @@ var createTaskBox = document.getElementById("createTaskBox");
 var closeButton = document.getElementsByClassName("closeButton")[0];
 var tempCounter = 0;
 
+var workitems = [];
+
 $(document).ready(function () {
-  createTaskBoard();
-  taskCount();
+  createTaskBoard(function() {
+      taskCount();
+  });
 });
 
 //Checks the amount of tasks in each section
 function taskCount() {
-  var incompleteTasks = $("#slot3 .task").length;
-  var inProgressTasks = $("#slot2 .task").length;
-  var completeTasks = $("#slot1 .task").length;
+  var incompleteTasks = $("#slot3 .workitem-frame").length;
+  var inProgressTasks = $("#slot2 .workitem-frame").length;
+  var completeTasks = $("#slot1 .workitem-frame").length;
 
   document.getElementById("numIncomplete").innerHTML = "(" + incompleteTasks + ")";
   document.getElementById("numInProgress").innerHTML = "(" + inProgressTasks + ")";
   document.getElementById("numComplete").innerHTML = "(" + completeTasks + ")";
 }
 
-function createTaskBoard() {
+function createTaskBoard(callback) {
     
     $.ajax({
         url: "./index.php?action=GET_ALL_WORKITEMS",
@@ -27,25 +30,12 @@ function createTaskBoard() {
         dataType: "json",
         success: function(data) {
             $.each(data, function(idx, item) {
+                workitems.push(item);
                 createWorkitem(item);
             });
-            console.log(data);
+            callback();
         }
     });
-    
-  //generates the tasks on page load - this will call from a db in the future
-  let index = 3;
-  $('#slot3').append("<div class='task' style='background-color: white' value = " + index + " id=task1" +
-    " draggable='true' ondragstart='dragtaskStart(event)'onClick='openChangeTask(event)'><span><strong>I am a Common Priority task</strong></span>" +
-    "<span style='position: absolute; right: 0; bottom: 0; padding-right: 5px;'><em><span>8 Hrs<span style='padding-left:20px;'>Priority: 1</span> <span style='padding-left:20px;'>UNCLAIMED</span></span></em></span></div>");
-
-  $('#slot3').append("<div class='task' style='background-color: yellow' value = " + index + " id=task2" +
-    " draggable='true' ondragstart='dragtaskStart(event)'onClick='openChangeTask(event)'><span><strong>I am a High Priority task</strong></span>" +
-    "<span style='position: absolute; right: 0; bottom: 0; padding-right: 5px;'><em><span>8 Hrs<span style='padding-left:20px;'>Priority: 2</span> <span style='padding-left:20px;'>UNCLAIMED</span></span></em></span></div>");
-
-  $('#slot3').append("<div class='task' value = " + index + " id=task3" +
-    " draggable='true' ondragstart='dragtaskStart(event)'onClick='openChangeTask(event)'><span><strong>I am a Critical Priority task</strong></span>" +
-    "<span style='position: absolute; right: 0; bottom: 0; padding-right: 5px;'><em><span>8 Hrs<span style='padding-left:20px;'>Priority: 3</span> <span style='padding-left:20px;'>UNCLAIMED</span></span></em></span></div>");
 }
 
 function createWorkitem(item) {
@@ -56,9 +46,36 @@ function createWorkitem(item) {
     } else if(item.priority == 3) {
         priorityColor = "red";
     }
-    var newItem = $("<div>");
-    newItem.append("<span><strong>")
-    $("#slot" + itemStatus).append(newItem);
+    var newItem = document.createElement("div");
+    var newItemTitle = document.createElement("div");
+    var newItemInfo = document.createElement("ul");
+    newItem.id = "workitem-" + item.workItemID;
+    $(newItemInfo).addClass("workitem-infoholder");
+    var hoursLeft = document.createElement("li");
+    var claimedBy = document.createElement("li");
+    if(item.claimedByUser == "0") {
+        claimedBy.innerHTML = "Not claimed";
+    } else {
+        claimedBy.innerHTML = "Claimed by: " + item.claimedByUser;
+    }
+    hoursLeft.innerHTML = item.hours + " hours left";
+    $(hoursLeft).addClass("workitem-hoursleft");
+    $(newItemInfo).append(hoursLeft);
+    $(newItemInfo).append(claimedBy);
+    $(newItemTitle).addClass("workitem-title");
+    $(newItemTitle).html(item.itemName);
+    $(newItem).append(newItemTitle);
+    $(newItem).append(newItemInfo);
+    $(newItem).addClass("workitem-frame");
+    $(newItem).css("background-color", priorityColor);
+    $(newItem).attr("draggable", true);
+    $(newItem).on("dragstart", function(ev) {
+        ev.originalEvent.dataTransfer.setData("text/plain", ev.target.id);
+    });
+    $(newItem).click(function(event) {
+        openChangeTask(event);
+    });
+    $("#slot" + item.itemStatus).append(newItem);
 }
 
 function allowtaskDrop(ev) {
@@ -93,6 +110,16 @@ function droptask(ev) {
 
 //Functions for opening the edit popup box for tasks
 function openChangeTask(ev) {
+    var itemID = ev.currentTarget.id.replace("workitem-", "");
+    var workitemMatch = workitems[itemID - 1];
+    $("#editTaskID").val(itemID);
+    if(workitemMatch) {
+        $("#editTaskName").val(workitemMatch.itemName);
+        $("#editTaskDesc").val(workitemMatch.itemDescription);
+        $("input[type=radio][name=editPriority]").val(workitemMatch.priority);
+        $("#editEstimatedHours").val(workitemMatch.hours);
+        $("#editUserClaims").val(workitemMatch.claimedByUser);
+    }
   editTaskBox.style.display = "block";
 }
 
@@ -141,6 +168,13 @@ function validTaskCreation(taskDescription, priority) {
 
 }
 
+function clearTaskBoard() {
+    workitems = [];
+    $("#slot1").empty();
+    $("#slot2").empty();
+    $("#slot3").empty();
+}
+
 $(document).ready(function() {
     $("#btnCreateTask").click(function() {
         var taskName = $("#newTaskName").val();
@@ -159,9 +193,47 @@ $(document).ready(function() {
                 description: description
             },
             success:function(data) {
-                console.log(data);
+                clearTaskBoard();
+                $.each(data, function(idx, item) {
+                    workitems.push(item);
+                    createWorkitem(item);
+                });
+                createTaskBox.style.display = "block";
             }
         });
+    });
+    
+    $("#btnEditTask").click(function() {
+        var taskName = $("#editTaskName").val();
+        var taskDesc = $("#editTaskDesc").val();
+        var itemID = $("#editTaskID").val();
+        var itemPriority = $("input[name=editPriority]:checked").val();
+        var claimedBy = $("#editUserClaims").val();
+        var estHours = $("#editEstimatedHours").val();
+        $.ajax({
+            url: "./index.php?action=SAVE_WORKITEM",
+            type: "POST",
+            dataType: "json",
+            data: {
+                name: taskName,
+                hours: estHours,
+                claimedBy: claimedBy,
+                priority: itemPriority,
+                description: taskDesc,
+                id: itemID
+            },
+            success: function(data) {
+                clearTaskBoard();
+                $.each(data, function(idx, item) {
+                    workitems.push(item);
+                    createWorkitem(item);
+                });
+                $("#editTaskBox").hide();
+            }
+        });
+    });
+    
+    $(".closeButton").click(function() {
     });
 });
 
