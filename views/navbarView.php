@@ -15,7 +15,7 @@
             ?>
             </li>
             <?php } else { ?>
-            <li><a href="index.php?action=GET_HOME" class="menuButtons">HOME</a></li>
+            <!--<li><a href="index.php?action=GET_HOME" class="menuButtons">HOME</a></li>-->
             <?php }
             ?>
         </ul>
