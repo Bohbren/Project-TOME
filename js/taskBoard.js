@@ -20,6 +20,7 @@ function taskCount() {
 }
 
 function createTaskBoard() {
+    
   //generates the tasks on page load - this will call from a db in the future
   let index = 3;
   $('#slot3').append("<div class='task' style='background-color: white' value = " + index + " id=task1" +
@@ -33,6 +34,13 @@ function createTaskBoard() {
   $('#slot3').append("<div class='task' value = " + index + " id=task3" +
     " draggable='true' ondragstart='dragtaskStart(event)'onClick='openChangeTask(event)'><span><strong>I am a Critical Priority task</strong></span>" +
     "<span style='position: absolute; right: 0; bottom: 0; padding-right: 5px;'><em><span>8 Hrs<span style='padding-left:20px;'>Priority: 3</span> <span style='padding-left:20px;'>UNCLAIMED</span></span></em></span></div>");
+}
+
+function createWorkitem(item) {
+    var itemStatus = item.status;
+    var newItem = $("<div>");
+    newItem.append("<span><strong>")
+    $("#slot" + itemStatus).append(newItem);
 }
 
 function allowtaskDrop(ev) {
@@ -97,58 +105,6 @@ document.getElementById("btnAddTask").addEventListener("click", function() {
   taskCount();
 });
 
-document.getElementById("btnCreateTask").addEventListener("click", function() {
-  console.log("Create task button clicked");
-
-  var taskDescription = $("#taskDescription").val();
-  var priority = document.querySelector('input[name="priority"]:checked'); 
-  var userClaimed = $("#userClaims :selected").text();
-  var color = null;
-  var estimatedHours = $("#estimatedHours").val();
-
-  console.log("Task Description: " + taskDescription);
-  console.log("Priority: " + priority);
-  console.log("User Claimed: " + userClaimed);
-  console.log("Estimated Hours: " + estimatedHours);
-
-  //Check to see what priority is selected
-  switch (priority.value) {
-    case "1":
-      color = "rgb(250, 48, 75)";
-      break;
-    case "2":
-      color = "yellow";
-    break;
-    case "3":
-      color = "white";
-    break;
-    default:
-      color = "white";
-      break;
-  }
-  if(validTaskCreation(taskDescription, priority)) {
-    console.log("the user: " + userClaimed);
-    $('#slot3').append("<div style='background-color:" + color + ";' class='task' value = " + tempCounter + " id="+ tempCounter++ + 
-    " draggable='true' ondragstart='dragtaskStart(event)'onClick='openChangeTask(event)'><span><strong>" + taskDescription + "</strong></span>" +
-    "<span style='position: absolute; right: 0; bottom: 0; padding-right: 5px;'><em><span>" + estimatedHours + " Hrs<span style='padding-left:20px;'>Priority: " + priority.value + "</span>" +
-    "<span style='padding-left:20px;'>" + userClaimed + "</span></span></em></span></div>");
-
-    createTaskBox.style.display = "none";
-    cleanTaskInputs();
-    taskCount();
-  }
-  else {
-    createTaskBox.style.display = "block";
-    taskCount();
-  }
-  taskCount();
-});
-
-//Clean out values from the task creation boxes
-function cleanTaskInputs() {
-  document.getElementById("taskDescription").value = "";
-}
-
 //validation for creating a new task - clientside
 function validTaskCreation(taskDescription, priority) {
   if(taskDescription === "" || taskDescription === null) {
@@ -166,4 +122,26 @@ function validTaskCreation(taskDescription, priority) {
   }
 
 }
+
+$(document).ready(function() {
+    $("#btnCreateTask").click(function() {
+        var estHours = $("#estimatedHours").val();
+        var claimedUser = $("#userClaims").val();
+        var priority = $("input[type=radio]:checked").val();
+        var description = $("#taskDescription").text();
+        $.ajax({
+            url : "./index.php?action=SAVE_WORKITEM",
+            type: "POST",
+            data: {
+                hours: estHours,
+                claimedBy: claimedUser,
+                priority: priority,
+                description: description
+            },
+            success:function(data) {
+                console.log(data);
+            }
+        });
+    });
+});
 

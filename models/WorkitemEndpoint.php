@@ -13,7 +13,7 @@ class WorkitemEndpoint {
         $stmt->execute();
         $results = $stmt->fetchAll();
         foreach ($results as $wi) {
-            $item = new WorkItem($wi["workItemID"], $wi["itemName"], $wi["itemDescription"], $wi["claimedByUser"], $wi["lastModifiedOn"], $wi["itemStatus"]);
+            $item = new WorkItem($wi["workItemID"], $wi["itemDescription"], $wi["claimedByUser"], $wi["lastModifiedOn"], $wi["itemStatus"], $wi["itemPriority"], $wi["itemHours"]);
             array_push($workitems, $item);
         }
         $stmt->closeCursor();
@@ -21,14 +21,15 @@ class WorkitemEndpoint {
     }
     
     public static function addWorkItem($item) {
-        $query = "INSERT INTO workitem(itemName, itemDescription, claimedByUser, lastModifiedOn, itemStatus) VALUES (:itemname, :itemdesc, :claimedby, :modifiedon, :status)";
+        $query = "INSERT INTO workitem(itemDescription, claimedByUser, lastModifiedOn, itemStatus, itemPriority, itemHours) VALUES (:itemdesc, :claimedby, :modifiedon, :status, :priority, :hours)";
         $db = Database::getDB();
         $stmt = $db->prepare($query);
-        $stmt->bindValue(":itemname", $item->getItemName());
         $stmt->bindValue(":itemdesc", $item->getItemDescription());
         $stmt->bindValue(":claimedby", $item->getClaimedByUser());
         $stmt->bindValue(":modifiedon", $item->getLastModifiedOn());
         $stmt->bindValue(":status", $item->getItemStatus());
+        $stmt->bindValue(":priority", $item->getPriority());
+        $stmt->bindValue(":hours", $item->getHours());
         $stmt->execute();
         $stmt->closeCursor();
     }

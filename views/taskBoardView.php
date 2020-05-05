@@ -12,7 +12,11 @@
 </head>
 
 <body>
-<?php include('navbarView.php'); ?>
+<?php 
+
+$usercount = count(UserEndpoint::getAllUsers());
+
+include('navbarView.php'); ?>
     <div class="boardInformation">
         <h2>Board Information: </h2>
         <!-- Call from databasse for each task under a project, add up all tasks hours in a loop, outputting it here -->
@@ -20,7 +24,7 @@
 
         </p>
         <!-- Call from database looping to see how many users are assigned to this specific project -->
-        <p>Users Working: 5</p>
+        <p>Users Working: <?php echo $usercount; ?></p>
         <!-- Algorithm assuming 8 hour work day, calculate how many hours there are with all tasks put together. Calculate days from that. Display date -->
         <p>Calculated Completion Date: April 7, 2020</p>        
 

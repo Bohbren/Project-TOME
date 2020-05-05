@@ -4,28 +4,34 @@ class Workitem {
     
     private $workItemID;
     private $itemName;
+    private $hours;
     private $itemDescription;
     private $claimedByUser;
     private $lastModifiedOn;
     private $itemStatus;
     private $priority;
     
-    public function __construct($workItemID, $itemName, $itemDescription, $claimedByUser, $lastModifiedOn, $itemStatus, $priority) {
+    public function __construct($workItemID, $itemDescription, $claimedByUser, $lastModifiedOn, $itemStatus, $priority, $hours) {
         $this->workItemID = $workItemID;
         $this->claimedByUser = $claimedByUser;
         $this->itemDescription = $itemDescription;
-        $this->itemName = $itemName;
         $this->lastModifiedOn = $lastModifiedOn;
         $this->itemStatus = $itemStatus;
         $this->priority = $priority;
+        $this->hours = $hours;
     }
     
-    function getWorkItemID() {
-        return $this->workItemID;
+    function getHours() {
+        return $this->hours;
     }
 
-    function getItemName() {
-        return $this->itemName;
+    function setHours($hours) {
+        $this->hours = $hours;
+    }
+
+        
+    function getWorkItemID() {
+        return $this->workItemID;
     }
 
     function getItemDescription() {
@@ -46,10 +52,6 @@ class Workitem {
 
     function setWorkItemID($workItemID) {
         $this->workItemID = $workItemID;
-    }
-
-    function setItemName($itemName) {
-        $this->itemName = $itemName;
     }
 
     function setItemDescription($itemDescription) {

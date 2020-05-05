@@ -6,6 +6,8 @@
 require_once('models/controllerSecurity.php');
 require_once("models/database.php");
 require_once('models/User.php');
+require_once 'models/Workitem.php';
+require_once 'models/WorkitemEndpoint.php';
 require_once('models/UserEndpoint.php');
 require_once('validation/validation.php');
 
@@ -119,6 +121,18 @@ switch ($action) {
     case 'calendar':
         
         include("views/calendar.php");
+        die();
+        break;
+    case "SAVE_WORKITEM":
+        $description = filter_input(INPUT_POST, "description");
+        $priority = filter_input(INPUT_POST, "priority");
+        $claimedBy = filter_input(INPUT_POST, "claimedBy");
+        $hours = filter_input(INPUT_POST, "hours");
+        $lastModified = date('Y-m-d H:i:s');
+        $workitem = new Workitem(null, $description, $claimedBy, $lastModified, 1, $priority, $hours);
+        WorkitemEndpoint::addWorkItem($workitem);
+        $workitems = WorkitemEndpoint::getWorkItems();
+        echo json_encode($workitems);
         die();
         break;
 }
