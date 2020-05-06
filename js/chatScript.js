@@ -33,9 +33,9 @@ $(document).ready(function(){
 
 	function make_chat_dialog_box(to_user_id, to_user_name)
 	{
-		var modal_content = '<div id="user_dialog_'+to_user_id+'" class="user_dialog" title="You have chat with '+to_user_name+'">';
+		var modal_content = '<div id="user_dialog_'+to_user_id+'" class="user_dialog" title="chat with '+to_user_name+'">';
 		modal_content += '<div style="height:400px; border:1px solid #ccc; overflow-y: scroll; margin-bottom:24px; padding:16px;" class="chat_history" data-touserid="'+to_user_id+'" id="chat_history_'+to_user_id+'">';
-		modal_content += get_chat_history(to_user_id);
+		modal_content += fetch_user_chat_history(to_user_id);
 		modal_content += '</div>';
 		modal_content += '<div class="form-group">';
 		modal_content += '<textarea name="chat_message_'+to_user_id+'" id="chat_message_'+to_user_id+'" class="form-control chat_message"></textarea>';
@@ -53,10 +53,10 @@ $(document).ready(function(){
 			width:400
 		});
 		$('#user_dialog_'+to_user_id).dialog('open');
-		$('#chat_message_'+to_user_id).emojioneArea({
-			pickerPosition:"top",
-			toneStyle: "bullet"
-		});
+		//$('#chat_message_'+to_user_id).emojioneArea({
+		//	pickerPosition:"top",
+		//	toneStyle: "bullet"
+		//});
 	});
 
 	$(document).on('click', '.send_chat', function(){
@@ -71,8 +71,8 @@ $(document).ready(function(){
 				success:function(data)
 				{
 					//$('#chat_message_'+to_user_id).val('');
-					var element = $('#chat_message_'+to_user_id).emojioneArea();
-					element[0].emojioneArea.setText('');
+					//var element = $('#chat_message_'+to_user_id).emojioneArea();
+					//element[0].emojioneArea.setText('');
 					$('#chat_history_'+to_user_id).html(data);
 				}
 			})
@@ -83,10 +83,10 @@ $(document).ready(function(){
 		}
 	});
 
-	function get_chat_history(to_user_id)
+	function fetch_user_chat_history(to_user_id)
 	{
 		$.ajax({
-			url:"models/chat/get_chat_history.php",
+			url:"models/chat/fetch_user_chat_history.php",
 			method:"POST",
 			data:{to_user_id:to_user_id},
 			success:function(data){

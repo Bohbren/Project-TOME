@@ -2,7 +2,7 @@
 
 //update_last_activity.php
 
-
+include('database_connection.php');
 
 session_start();
 

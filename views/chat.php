@@ -35,7 +35,7 @@
 				</div>
 				<div class="col-md-2 col-sm-3">
 					<input type="hidden" id="is_active_group_chat_window" value="no" />
-					<button type="button" name="group_chat" id="group_chat" class="btn btn-warning btn-xs">Group Chat</button>
+					<button type="button" name="group_chat" id="group_chat" class="btn btn-warning btn-xs">Team Chat</button>
 				</div>
 				<div class="col-md-2 col-sm-3">
 					
@@ -95,7 +95,7 @@
 </style>  
 
 
-<div id="group_chat_dialog" title="Group Chat Window">
+<div id="group_chat_dialog" title="Team Chat">
 	<div id="group_chat_history" style="height:400px; border:1px solid #ccc; overflow-y: scroll; margin-bottom:24px; padding:16px;">
 
 	</div>
@@ -107,7 +107,7 @@
 			</div>
 			<div class="image_upload">
 				<form id="uploadImage" method="post" action="upload.php">
-					<label for="uploadFile"><img src="upload.png" /></label>
+					<!--<label for="uploadFile"><img src="upload.png" /></label>-->
 					<input type="file" name="uploadFile" id="uploadFile" accept=".jpg, .png" />
 				</form>
 			</div>
